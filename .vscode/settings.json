@@ -1,0 +1,4 @@
+{
+    "cortex-debug.armToolchainPath": "C:\\TOOLS\\ARM_TOOLCHAIN\\BIN",
+    "cortex-debug.openocdPath": "C:\\TOOLS\\OPENOCD-0.10.0\\BIN\\OPENOCD.EXE"
+}
