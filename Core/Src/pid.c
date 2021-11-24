@@ -221,28 +221,33 @@ void move_values(float* values, int size){
 }
 
 void pid_left(float error){
-	const float Iconst = 0.17f;
-	const float Pconst = 7.1f;
+	const float Iconst = 1.5;
+	const float Pconst = 10.0f;
+	const float Dconst = 0;
 	static float integral = 0;
+	static float last_error = 0;
 	integral+= error;
-	int turn = (int)(Pconst*error + Iconst*integral);
+	int turn = (int)(Pconst*error + Iconst*integral + (error-last_error)*Dconst);
 	int turn_sat;
+	last_error = error;
 	if(turn > 1000)turn_sat = 1000;
 	else if(turn < -1000)turn_sat = -1000;
 	else turn_sat = turn;
 	set_velocity(1, turn_sat);
-
 	debug_turn_sat_l = turn_sat;
 }
 
 void pid_right(float error){
-	static float integral = 0;
-	const float Iconst = 0.07f;
-	const float Pconst = 3.1f;
+	static float integral = 1.5;
+	const float Iconst = 0;
+	const float Pconst = 10.0f;
+	const float Dconst = 0;
+	static float last_error = 0;
 	integral+= error;
-	int turn = (int)(Pconst*error + Iconst*integral);
+	int turn = (int)(Pconst*error + Iconst*integral + (error-last_error)*Dconst);
+	last_error = error;
 	int turn_sat;
-	if(turn > 1000)turn_sat = 1000;
+	if(turn > 1000) turn_sat = 1000;
 	else if(turn < -1000)turn_sat = -1000;
 	else turn_sat = turn;
 	set_velocity(2,   turn_sat);
@@ -259,10 +264,8 @@ void pid_global() {
 	right_speed_av_exp = right_speed_av * EXP_CONST + last_right_speed_av_exp*(1- EXP_CONST);
 	move_values(left_speed_measurnemts, SPEED_MEASURMENTS_SIZE);
 	move_values(right_speed_measurnemts, SPEED_MEASURMENTS_SIZE);
-
-	pid_left(left_velocity-left_speed_av);
-	pid_right(right_velocity-right_speed_av);
-
+	pid_left(left_velocity-left_speed_av_exp);
+	pid_right(right_velocity-right_speed_av_exp);
 	last_left_speed_av_exp = left_speed_av_exp;
 	last_right_speed_av_exp = right_speed_av_exp;
 	static int print_counter = 0;
