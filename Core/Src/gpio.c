@@ -53,7 +53,7 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, XSHUT2_Pin|XSHUT1_Pin|UNUSED8_Pin|UNUSED9_Pin
                           |UNUSED10_Pin|UNUSED11_Pin|LED2_Pin|UNUSED12_Pin
-                          |BBAC_Pin|UNUSED13_Pin|XSHUT5_Pin, GPIO_PIN_RESET);
+                          |BBAC_Pin|UNUSED14_Pin|XSHUT5_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, UNUSED1_Pin|UNUSED2_Pin|BFOR_Pin|UNUSED3_Pin
@@ -81,7 +81,7 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pins : PCPin PCPin PCPin PCPin
                            PCPin PCPin */
   GPIO_InitStruct.Pin = UNUSED8_Pin|UNUSED9_Pin|UNUSED10_Pin|UNUSED11_Pin
-                          |UNUSED12_Pin|UNUSED13_Pin;
+                          |UNUSED12_Pin|UNUSED14_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

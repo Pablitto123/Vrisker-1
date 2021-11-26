@@ -138,8 +138,8 @@ void Error_Handler(void);
 #define SWDCK_GPIO_Port GPIOA
 #define UNUSED5_Pin GPIO_PIN_15
 #define UNUSED5_GPIO_Port GPIOA
-#define UNUSED13_Pin GPIO_PIN_10
-#define UNUSED13_GPIO_Port GPIOC
+#define UNUSED14_Pin GPIO_PIN_10
+#define UNUSED14_GPIO_Port GPIOC
 #define INT5_Pin GPIO_PIN_11
 #define INT5_GPIO_Port GPIOC
 #define INT5_EXTI_IRQn EXTI15_10_IRQn
