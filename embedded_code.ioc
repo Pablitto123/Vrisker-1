@@ -588,4 +588,3 @@ PA3.GPIO_Label=BATLVL
 PB1.GPIOParameters=GPIO_Label
 PA7.Signal=S_TIM14_CH1
 PA6.Locked=true
-isbadioc=false
