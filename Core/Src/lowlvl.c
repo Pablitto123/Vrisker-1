@@ -477,9 +477,9 @@ void motorsPWMInit() {
 
 void motorLeftSetPWM(int32_t duty) {
 	if (duty * actual_left_duty <= 0) {
-		HAL_GPIO_WritePin(AFOR_GPIO_Port, AFOR_Pin,
+		HAL_GPIO_WritePin(BFOR_GPIO_Port, BFOR_Pin,
 				duty >= 0 ? GPIO_PIN_SET : GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(ABAC_GPIO_Port, ABAC_Pin,
+		HAL_GPIO_WritePin(BBAC_GPIO_Port, BBAC_Pin,
 				duty >= 0 ? GPIO_PIN_RESET : GPIO_PIN_SET);
 	}
 	TIM12->CCR1 = duty > 0 ? duty : -duty;
@@ -491,9 +491,9 @@ void motorLeftSetPWM(int32_t duty) {
 
 void motorRightSetPWM(int32_t duty) {
 	if (duty * actual_right_duty <= 0) {
-		HAL_GPIO_WritePin(BFOR_GPIO_Port, BFOR_Pin,
+		HAL_GPIO_WritePin(AFOR_GPIO_Port, AFOR_Pin,
 				duty >= 0 ? GPIO_PIN_SET : GPIO_PIN_RESET);
-		HAL_GPIO_WritePin(BBAC_GPIO_Port, BBAC_Pin,
+		HAL_GPIO_WritePin(ABAC_GPIO_Port, ABAC_Pin,
 				duty >= 0 ? GPIO_PIN_RESET : GPIO_PIN_SET);
 	}
 	TIM12->CCR2 = duty > 0 ? duty : -duty;

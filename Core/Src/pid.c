@@ -219,34 +219,35 @@ void move_values(float* values, int size){
 		values[i-1] = values[i];
 	}
 }
-//controls right motor
+//controls left motor
 void pid_left(float error){
 	static float integral_left = 0;
-	const float Iconst = 0.17f;
-	const float Pconst = 7.1f;
+	const float Iconst = 0.92f;
+	const float Pconst = 12.1f;
 	integral_left+= error;
 	int turn = (int)(Pconst*error + Iconst*integral_left);
 	int turn_sat;
 	if(turn > 1000)turn_sat = 1000;
 	else if(turn < -1000)turn_sat = -1000;
 	else turn_sat = turn;
-	set_velocity(2, turn_sat);
+	set_velocity(1, turn_sat);
 
 	debug_turn_sat_l = turn_sat;
 }
 
-//controls left motor
+//controls right motor
 void pid_right(float error){
 	static float integral_right = 0;
-	const float Iconst = 0.2f;
-	const float Pconst = 3.1f;
+	const float Iconst = 0.82f;
+	const float Pconst = 12.1f;
 	integral_right+= error;
 	int turn = (int)(Pconst*error + Iconst*integral_right);
 	int turn_sat;
 	if(turn > 1000)turn_sat = 1000;
 	else if(turn < -1000)turn_sat = -1000;
 	else turn_sat = turn;
-	set_velocity(1,   turn_sat);
+	set_velocity(2,   turn_sat);
+
 	debug_turn_sat_r = turn_sat;
 }
 
@@ -261,8 +262,8 @@ void pid_global() {
 	move_values(left_speed_measurnemts, SPEED_MEASURMENTS_SIZE);
 	move_values(right_speed_measurnemts, SPEED_MEASURMENTS_SIZE);
 
-	pid_left(left_velocity - left_speed_av_exp);
-	pid_right(right_velocity - right_speed_av_exp);
+	pid_left(left_velocity - right_speed_av_exp);
+	pid_right(right_velocity - left_speed_av_exp);
 //	set_velocity(2, 1000);
 
 	last_left_speed_av_exp = left_speed_av_exp;
