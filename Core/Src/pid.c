@@ -37,6 +37,10 @@ float right_speed_av_exp = 0;
 int debug_turn_sat_l;
 int debug_turn_sat_r;
 
+//Maciej's code
+uint32_t stopTime;
+uint8_t PIDstopFlag = 0;
+
 void performEncodersMeasurements() {
 	uint32_t m = clock_timer_end_point();
 	left_cnt = getLeftTickCount();
@@ -261,6 +265,12 @@ void pid_global() {
 	right_speed_av_exp = right_speed_av * EXP_CONST + last_right_speed_av_exp*(1- EXP_CONST);
 	move_values(left_speed_measurnemts, SPEED_MEASURMENTS_SIZE);
 	move_values(right_speed_measurnemts, SPEED_MEASURMENTS_SIZE);
+
+	//Maciej's code
+	if(HAL_GetTick() >= stopTime && PIDstopFlag){
+		left_velocity = 0;
+		right_velocity = 0;
+	}
 
 	pid_left(left_velocity - right_speed_av_exp);
 	pid_right(right_velocity - left_speed_av_exp);
